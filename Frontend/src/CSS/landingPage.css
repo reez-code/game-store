@@ -1,0 +1,24 @@
+section {
+  height: 600px;
+  background-image: url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2933620/extras/CODBO6_Animated.gif?t=1717960801");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.h4-landing-page {
+  color: white;
+  padding-top: 15%;
+  padding-left: 5%;
+  font-family: "Tiny5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+#section-1 {
+  color: white;
+  padding-left: 6%;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 18px;
+}
