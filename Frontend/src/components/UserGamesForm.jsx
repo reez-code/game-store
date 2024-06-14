@@ -1,39 +1,245 @@
 import "../CSS/userGames.css";
+import { useForm, Controller } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 function UserGamesForm() {
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
+  const schema = z.object({
+    name: z
+      .string({
+        required_error: "Name is required",
+      })
+      .min(1, { message: "Name is required" }),
+    phone_number: z
+      .string({
+        required_error: "Phone Number is required",
+      })
+      .length(10, { message: "Phone Number should be 10 characters" }),
+
+    email: z
+      .string({
+        required_error: "Email is required",
+      })
+      .min(1, { message: "Email is required" }),
+    game_name: z
+      .string({
+        required_error: "Game Name is required",
+      })
+      .min(1, { message: "Game Name is required" }),
+    image: z
+      .string({
+        required_error: "Image is required",
+      })
+      .min(1, { message: "Image is required" })
+      .url({ message: "Enter a valid image url" }),
+    price: z
+      .string({
+        required_error: "Price is required",
+      })
+      .min(1, { message: "Price is required" }),
+    category: z
+      .string({
+        required_error: "Category is required",
+      })
+      .min(1, { message: "Category is required" }),
+    reviews: z
+      .string({
+        required_error: "Review is required",
+      })
+      .min(1, { message: "Review is required" }),
+    game_description: z
+      .string({
+        required_error: "Description is required",
+      })
+      .min(1, { message: "Description is required" }),
+  });
+
+  const { control, handleSubmit, formState } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: "",
+      phone_number: "",
+      email: "",
+      game_name: "",
+      image: "",
+      price: "",
+      category: "",
+      reviews: "",
+      game_description: "",
+    },
+  });
+
+  const onSumbit = (values) => {
+    console.log(values);
+  };
+  console.log(formState.errors);
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div class="form-container">
-          <div class="form">
-            <span class="heading">Fill the Form </span>
-            <input placeholder="Your Name" type="text" class="input" />
-            <input placeholder="Your Phone Number" type="text" class="input" />
-            <input
-              placeholder="Your Email"
-              id="mail"
-              type="mail"
-              class="input"
-            />
-            <input placeholder="Game Name" type="text" class="input" />
-            <input placeholder="Image" type="url" class="input" />
-            <input placeholder="Price" type="number" class="input" />
-            <input placeholder="Add a Review" type="number" class="input" />
-            <textarea
-              placeholder="Description"
-              rows="10"
-              cols="30"
-              id="message"
-              name="message"
-              class="textarea"
-            ></textarea>
-            <div class="button-container">
-              <button class="send-button" type="submit">
-                Submit
-              </button>
-            </div>
+      <form className="form-container" onSubmit={handleSubmit(onSumbit)}>
+        <div className="form">
+          <span className="heading">Fill the Form </span>
+          <Controller
+            name="name"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Your Name"
+                  type="text"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="phone_number"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Your Phone Number"
+                  type="text"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Your Email"
+                  id="mail"
+                  type="mail"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="game_name"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Game Name"
+                  type="text"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="image"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Image"
+                  type="url"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="price"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Price"
+                  type="number"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="category"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Add a Category"
+                  type="text"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="reviews"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Add a Review"
+                  type="text"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="game_description"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <textarea
+                  placeholder="Description"
+                  rows="10"
+                  cols="30"
+                  id="message"
+                  name="message"
+                  className="textarea"
+                  {...field}
+                ></textarea>
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+
+          <div className="button-container">
+            <button className="send-button" type="submit">
+              Submit
+            </button>
           </div>
         </div>
       </form>
