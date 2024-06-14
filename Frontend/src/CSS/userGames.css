@@ -3,7 +3,7 @@ body {
 }
 
 .orange {
-  color: #ff7a01;
+  color: #74d7cb;
 }
 
 .form-container {
@@ -11,7 +11,7 @@ body {
   margin: 30px;
   background-color: #001925;
   padding: 30px;
-  border-left: 5px solid #ff7a01;
+  border-left: 5px solid #74d7cb;
   clip-path: polygon(
     0 0,
     100% 0,
@@ -43,7 +43,7 @@ body {
 }
 
 .form-container .form .input:focus {
-  border-left: 5px solid #ff7a01;
+  border-left: 5px solid #74d7cb;
 }
 
 .form-container .form .textarea {
@@ -52,7 +52,7 @@ body {
   border: none;
   outline: none;
   background-color: #013747;
-  color: #ff7a01;
+  color: #74d7cb;
   font-weight: bold;
   resize: none;
   max-height: 150px;
@@ -62,7 +62,7 @@ body {
 }
 
 .form-container .form .textarea:focus {
-  border-left: 5px solid #ff7a01;
+  border-left: 5px solid #74d7cb;
 }
 
 .form-container .form .button-container {
@@ -72,7 +72,7 @@ body {
 
 .form-container .form .button-container .send-button {
   flex-basis: 70%;
-  background: #ff7a01;
+  background: #74d7cb;
   padding: 10px;
   color: #001925;
   text-align: center;
@@ -83,12 +83,12 @@ body {
 
 .form-container .form .button-container .send-button:hover {
   background: transparent;
-  border: 1px solid #ff7a01;
-  color: #ff7a01;
+  border: 1px solid #74d7cb;
+  color: #74d7cb;
 }
 
 .form-container .form .button-container .reset-button-container {
-  filter: drop-shadow(1px 1px 0px #ff7a01);
+  filter: drop-shadow(1px 1px 0px #74d7cb);
   flex-basis: 30%;
 }
 
@@ -96,7 +96,7 @@ body {
   position: relative;
   text-align: center;
   padding: 10px;
-  color: #ff7a01;
+  color: #74d7cb;
   font-weight: bold;
   background: #001925;
   clip-path: polygon(
@@ -114,6 +114,6 @@ body {
   .button-container
   .reset-button-container
   .reset-button:hover {
-  background: #ff7a01;
+  background: #74d7cb;
   color: #001925;
 }
