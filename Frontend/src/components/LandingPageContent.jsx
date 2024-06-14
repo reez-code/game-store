@@ -1,5 +1,7 @@
 import NavLink from "react-bootstrap/esm/NavLink";
 import { Link } from "react-router-dom";
+import "../CSS/landingPage.css";
+
 function LandingPageContent() {
   const styling = {
     backgroundColor: "#212529",
