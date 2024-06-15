@@ -8,6 +8,8 @@ class Review:
         self.review = review
         self.game_id = game_id
         self.user_id = user_id
+        self.game = None
+        self.user = None
     
     @classmethod
     def create_table(cls):
@@ -22,4 +24,25 @@ class Review:
         cursor.execute(sql)
         conn.commit()
 
-        
+        print("Review Table is created.")
+    
+       
+    def save(self):
+        sql = f"""
+            INSERT INTO {self.TABLE_NAME} (review, game_id, user_id)
+            VALUES (?, ?, ?)
+        """
+        cursor.execute(sql, (self.review, self.game_id, self.user_id))
+        conn.commit()
+
+        self.id = cursor.lastrowid
+
+        return self.to_dict()
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "review": self.review,
+            "game": self.game,
+            "user": self.user
+        }
