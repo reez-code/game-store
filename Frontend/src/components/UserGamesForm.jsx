@@ -3,7 +3,27 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Form from "react-bootstrap/Form";
+import { useEffect, useState } from "react";
+import { BASE_URL } from "../../fetch_data";
 function UserGamesForm() {
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/categories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) =>
+      res
+        .json()
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => console.log(err))
+    );
+  }, []);
+
   const schema = z.object({
     name: z
       .string({
@@ -72,7 +92,7 @@ function UserGamesForm() {
   const onSumbit = (values) => {
     console.log(values);
   };
-  console.log(formState.errors);
+
   return (
     <>
       <form className="form-container" onSubmit={handleSubmit(onSumbit)}>
