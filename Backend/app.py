@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+
 from models.category import Category
+from models.users import User
+from models.game import Game
+from validation import GamesModel, UserModel
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_credentials = True, allow_methods = ["*"], allow_headers = ["*"])
-class Games(BaseModel):
-    name: str
+
 
 @app.get("/")
 def read_root():
@@ -15,12 +17,21 @@ def read_root():
 def get_game():
     return [{"name": "vikings"}]
 
-@app.post("/sell")
-def save_game(data: Games):
-    print(data)
-
 @app.get("/categories")
 def categories():
     categories = Category.find_all()
 
     return categories
+@app.post("/sell")
+def save_game(data:GamesModel):
+    game = Game(data.name, data.image, data.price, data.category, data.description)
+    game.save()
+    return game.to_dict()
+
+
+    
+    
+
+
+
+

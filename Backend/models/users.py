@@ -2,7 +2,7 @@ from db import conn, cursor
 
 class User:
     TABLE_NAME = "users"
-
+    user_id = None
     def __init__(self, name, phone_number, email):
         self.id = None
         self.name = name
@@ -13,10 +13,9 @@ class User:
     def create_table(cls):
         sql = f"""
             CREATE TABLE IF NOT EXISTS {cls.TABLE_NAME}(
-              id INTEGER PRIMARY K
-              EY AUTOINCREMENTS,
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
               name TEXT NOT NULL,
-              phone_number INTEGER NOT NULL,
+              phone_number TEXT NOT NULL,
               email TEXT NOT NULL
             )
         """
@@ -32,6 +31,7 @@ class User:
         conn.commit()
 
         self.id = cursor.lastrowid
+        self.user_id = cursor.lastrowid
         return self.to_dict()
 
     def to_dict(self):
@@ -41,3 +41,6 @@ class User:
             "phone_number": self.phone_number,
             "email": self.email
         }
+    
+# User.create_table()
+

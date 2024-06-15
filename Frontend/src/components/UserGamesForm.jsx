@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../fetch_data";
+import Button from "react-bootstrap/Button";
 function UserGamesForm() {
   const [categories, setCategories] = useState([]);
 
@@ -25,7 +26,7 @@ function UserGamesForm() {
   }, []);
 
   const schema = z.object({
-    name: z
+    user_name: z
       .string({
         required_error: "Name is required",
       })
@@ -41,7 +42,7 @@ function UserGamesForm() {
         required_error: "Email is required",
       })
       .min(1, { message: "Email is required" }),
-    game_name: z
+    name: z
       .string({
         required_error: "Game Name is required",
       })
@@ -67,7 +68,7 @@ function UserGamesForm() {
         required_error: "Review is required",
       })
       .min(1, { message: "Review is required" }),
-    game_description: z
+    description: z
       .string({
         required_error: "Description is required",
       })
@@ -77,20 +78,34 @@ function UserGamesForm() {
   const { control, handleSubmit, formState } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "",
+      user_name: "",
       phone_number: "",
       email: "",
-      game_name: "",
+      name: "",
       image: "",
       price: "",
       category: "",
       reviews: "",
-      game_description: "",
+      description: "",
     },
   });
 
-  const onSumbit = (values) => {
-    console.log(values);
+  const onSumbit = async (values) => {
+    // console.log(values);
+    await fetch(`${BASE_URL}/sell`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...values,
+        price: Number(values.price),
+        category: Number(values.category),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -99,7 +114,7 @@ function UserGamesForm() {
         <div className="form">
           <span className="heading">Fill the Form </span>
           <Controller
-            name="name"
+            name="user_name"
             control={control}
             render={({ field, fieldState }) => (
               <div>
@@ -151,7 +166,7 @@ function UserGamesForm() {
             )}
           />
           <Controller
-            name="game_name"
+            name="name"
             control={control}
             render={({ field, fieldState }) => (
               <div>
@@ -225,25 +240,9 @@ function UserGamesForm() {
               </div>
             )}
           />
+
           <Controller
-            name="reviews"
-            control={control}
-            render={({ field, fieldState }) => (
-              <div>
-                <input
-                  placeholder="Add a Review"
-                  type="text"
-                  className="input"
-                  {...field}
-                />
-                {fieldState.invalid && (
-                  <p className="text-danger">{fieldState.error.message}</p>
-                )}
-              </div>
-            )}
-          />
-          <Controller
-            name="game_description"
+            name="description"
             control={control}
             render={({ field, fieldState }) => (
               <div>
@@ -263,10 +262,32 @@ function UserGamesForm() {
             )}
           />
 
+          <Controller
+            name="reviews"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Add a Review"
+                  type="text"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+
           <div className="button-container">
-            <button className="send-button" type="submit">
-              Submit
-            </button>
+            <Button
+              className="send-button"
+              type="submit"
+              disabled={formState.isSubmitting}
+            >
+              {formState.isSubmitting ? "Submitting…" : "Submit"}
+            </Button>
           </div>
         </div>
       </form>

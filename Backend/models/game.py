@@ -1,15 +1,15 @@
 from db import conn, cursor
-
+from models.users import User
 class Game:
     TABLE_NAME = "games"
-    def __init__(self, name, image, price, category_id, user_id, description):
+    def __init__(self, name, image, price, category_id, description):
         self.id = None
         self.name =  name
         self.image = image
         self.price = price
         self.category_id = category_id
         self.description = description
-        self.user_id = user_id
+        self.user_id = User.user_id
         self.category = None
         self.user = None
         
@@ -39,8 +39,7 @@ class Game:
         cursor.execute(sql, (self.name, self.image, self.price, self.category_id, self.description, self.user_id))
         conn.commit()
         self.id = cursor.lastrowid
-
-        return self.to_dict()
+        return self
 
     def to_dict(self):
         return {
@@ -52,3 +51,15 @@ class Game:
             "description": self.description,
             "user": self.user
         }
+    
+    
+    @classmethod
+    def drop_table(cls):
+            sql = f"""
+                  DROP TABLE {
+                        cls.TABLE_NAME}
+            """
+            cursor.execute(sql)
+            conn.commit
+
+# Game.create_table()
