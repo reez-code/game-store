@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../fetch_data";
 function UserGamesForm() {
-  const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     fetch(`${BASE_URL}/categories`, {
@@ -18,7 +18,7 @@ function UserGamesForm() {
       res
         .json()
         .then((data) => {
-          console.log(data);
+          setCategories(data);
         })
         .catch((err) => console.log(err))
     );
@@ -212,10 +212,13 @@ function UserGamesForm() {
                   {...field}
                 >
                   <option>Select Category</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
                 </Form.Select>
+
                 {fieldState.invalid && (
                   <p className="text-danger">{fieldState.error.message}</p>
                 )}
