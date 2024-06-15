@@ -2,7 +2,7 @@ import "../CSS/userGames.css";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import Form from "react-bootstrap/Form";
 function UserGamesForm() {
   const schema = z.object({
     name: z
@@ -186,12 +186,16 @@ function UserGamesForm() {
             control={control}
             render={({ field, fieldState }) => (
               <div>
-                <input
-                  placeholder="Add a Category"
-                  type="text"
+                <Form.Select
+                  aria-label="Default select example"
                   className="input"
                   {...field}
-                />
+                >
+                  <option>Select Category</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </Form.Select>
                 {fieldState.invalid && (
                   <p className="text-danger">{fieldState.error.message}</p>
                 )}
