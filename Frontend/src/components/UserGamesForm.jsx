@@ -26,22 +26,6 @@ function UserGamesForm() {
   }, []);
 
   const schema = z.object({
-    user_name: z
-      .string({
-        required_error: "Name is required",
-      })
-      .min(1, { message: "Name is required" }),
-    phone_number: z
-      .string({
-        required_error: "Phone Number is required",
-      })
-      .length(10, { message: "Phone Number should be 10 characters" }),
-
-    email: z
-      .string({
-        required_error: "Email is required",
-      })
-      .min(1, { message: "Email is required" }),
     name: z
       .string({
         required_error: "Game Name is required",
@@ -63,11 +47,6 @@ function UserGamesForm() {
         required_error: "Category is required",
       })
       .min(1, { message: "Category is required" }),
-    reviews: z
-      .string({
-        required_error: "Review is required",
-      })
-      .min(1, { message: "Review is required" }),
     description: z
       .string({
         required_error: "Description is required",
@@ -85,13 +64,12 @@ function UserGamesForm() {
       image: "",
       price: "",
       category: "",
-      reviews: "",
       description: "",
     },
   });
 
   const onSumbit = async (values) => {
-    // console.log(values);
+    console.log(values);
     await fetch(`${BASE_URL}/sell`, {
       method: "POST",
       headers: {
@@ -113,58 +91,6 @@ function UserGamesForm() {
       <form className="form-container" onSubmit={handleSubmit(onSumbit)}>
         <div className="form">
           <span className="heading">Fill the Form </span>
-          <Controller
-            name="user_name"
-            control={control}
-            render={({ field, fieldState }) => (
-              <div>
-                <input
-                  placeholder="Your Name"
-                  type="text"
-                  className="input"
-                  {...field}
-                />
-                {fieldState.invalid && (
-                  <p className="text-danger">{fieldState.error.message}</p>
-                )}
-              </div>
-            )}
-          />
-          <Controller
-            name="phone_number"
-            control={control}
-            render={({ field, fieldState }) => (
-              <div>
-                <input
-                  placeholder="Your Phone Number"
-                  type="text"
-                  className="input"
-                  {...field}
-                />
-                {fieldState.invalid && (
-                  <p className="text-danger">{fieldState.error.message}</p>
-                )}
-              </div>
-            )}
-          />
-          <Controller
-            name="email"
-            control={control}
-            render={({ field, fieldState }) => (
-              <div>
-                <input
-                  placeholder="Your Email"
-                  id="mail"
-                  type="mail"
-                  className="input"
-                  {...field}
-                />
-                {fieldState.invalid && (
-                  <p className="text-danger">{fieldState.error.message}</p>
-                )}
-              </div>
-            )}
-          />
           <Controller
             name="name"
             control={control}
@@ -255,24 +181,6 @@ function UserGamesForm() {
                   className="textarea"
                   {...field}
                 ></textarea>
-                {fieldState.invalid && (
-                  <p className="text-danger">{fieldState.error.message}</p>
-                )}
-              </div>
-            )}
-          />
-
-          <Controller
-            name="reviews"
-            control={control}
-            render={({ field, fieldState }) => (
-              <div>
-                <input
-                  placeholder="Add a Review"
-                  type="text"
-                  className="input"
-                  {...field}
-                />
                 {fieldState.invalid && (
                   <p className="text-danger">{fieldState.error.message}</p>
                 )}

@@ -22,11 +22,14 @@ def categories():
     categories = Category.find_all()
 
     return categories
+
 @app.post("/sell")
 def save_game(data:GamesModel):
     game = Game(data.name, data.image, data.price, data.category, data.description)
     game.save()
     return game.to_dict()
+
+
 
 
     
