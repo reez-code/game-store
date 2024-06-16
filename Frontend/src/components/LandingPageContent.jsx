@@ -12,17 +12,13 @@ function LandingPageContent() {
         <h3 className="h4-landing-page">WELCOME TO THE WORLD OF GAMING</h3>
         <p id="section-1-content">
           We offer you multiple games from multiple genres - <br />
-          not only that but you can sell your games on our website{" "}
+          not only that but you can sell your games on our website
         </p>
         <NavLink className="button-1" href="/home">
           <span id="button-text">
-            <Link
-              style={{ textDecoration: "none" }}
-              className="link-text"
-              to="/home"
-            >
+            <p style={{ textDecoration: "none" }} className="link-text">
               SHOP NOW
-            </Link>
+            </p>
           </span>
         </NavLink>
       </section>

@@ -50,6 +50,6 @@ class User:
             cursor.execute(sql)
             conn.commit
     
-# User.create_table()
+User.create_table()
 
-
+# User.drop_table()

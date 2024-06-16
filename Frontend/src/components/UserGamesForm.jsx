@@ -26,6 +26,21 @@ function UserGamesForm() {
   }, []);
 
   const schema = z.object({
+    user_name: z
+      .string({
+        required_error: "Name is required",
+      })
+      .min(1, { message: "Name is required" }),
+    phone_number: z
+      .string({
+        required_error: "Phone Number must be 10 characters",
+      })
+      .length(10, { message: "Phone Number must be 10 characters" }),
+    email: z
+      .string({
+        required_error: "Email is required",
+      })
+      .min(1, { message: "Email is required" }),
     name: z
       .string({
         required_error: "Game Name is required",
@@ -90,6 +105,58 @@ function UserGamesForm() {
       <form className="form-container" onSubmit={handleSubmit(onSumbit)}>
         <div className="form">
           <span className="heading">Fill the Form </span>
+          <Controller
+            name="user_name"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Name"
+                  type="text"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="phone_number"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Phone Number"
+                  type="number"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div>
+                <input
+                  placeholder="Email"
+                  type="email"
+                  id="email"
+                  className="input"
+                  {...field}
+                />
+                {fieldState.invalid && (
+                  <p className="text-danger">{fieldState.error.message}</p>
+                )}
+              </div>
+            )}
+          />
           <Controller
             name="name"
             control={control}
