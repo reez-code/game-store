@@ -26,7 +26,7 @@ class Game:
             ON games.user_id = users.id
             """
         rows = cursor.execute(sql).fetchall()
-        print(rows)
+        
 
         return [
              cls.row_to_instance(row).to_dict() for row in rows
@@ -101,3 +101,8 @@ class Game:
 # Game.drop_table()
 
 # Game.create_table()
+# turismo = Game("Gran Turismo 7", "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Gran_Turismo_7_cover_art.jpg/220px-Gran_Turismo_7_cover_art.jpg", 8000, 10, "Gran Turismo 7 is a 2022 racing simulation video game developed by Polyphony Digital and published by Sony Interactive Entertainment. The game is the eighth main installment and the thirteenth overall in the Gran Turismo series.It was released for the PlayStation 4 and PlayStation 5. Gran Turismo 7 also features virtual reality support compatible with PlayStation VR2 through a free in-game update.", 3)
+# turismo.save()
+
+# horizon = Game("Horizon Forbidden West", "https://upload.wikimedia.org/wikipedia/en/thumb/6/69/Horizon_Forbidden_West_cover_art.jpg/220px-Horizon_Forbidden_West_cover_art.jpg", 8000, 3, "Horizon Forbidden West is a 2022 action role-playing game developed by Guerrilla Games and published by Sony Interactive Entertainment. The sequel to Horizon Zero Dawn (2017), the game is set in a post-apocalyptic version of the Western United States, recovering from the aftermath of an extinction event caused by a rogue robot swarm. The player, assuming control of Aloy, must venture into the Forbidden West to find the source of a mysterious plague that kills all it infects. The player can explore the open world and complete quests using ranged and melee weapons against machine creatures and hostile rebels. Forbidden West introduced new gameplay mechanics to the franchise, such as new traversal tools, underwater exploration, and expanded melee combat.", 3)
+# horizon.save()

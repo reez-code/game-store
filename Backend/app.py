@@ -28,7 +28,7 @@ def save_game(data:GamesModel):
     game.save()
     return game.to_dict()
 
-@app.get("/sell")
+@app.get("/home")
 def get_games():
     games = Game.find_all()
     return games
