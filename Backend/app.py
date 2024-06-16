@@ -2,9 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from models.category import Category
-from models.users import User
 from models.game import Game
-from validation import GamesModel, UserModel
+from validation import GamesModel
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_credentials = True, allow_methods = ["*"], allow_headers = ["*"])
 
@@ -12,10 +11,6 @@ app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_credentials = Tr
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
-
-@app.get("/sell")
-def get_game():
-    return [{"name": "vikings"}]
 
 @app.get("/categories")
 def categories():
@@ -25,7 +20,7 @@ def categories():
 
 @app.post("/sell")
 def save_game(data:GamesModel):
-    game = Game(data.name, data.image, data.price, data.category, data.description)
+    game = Game(data.name, data.image, data.price, data.category_id, data.description)
     game.save()
     return game.to_dict()
 

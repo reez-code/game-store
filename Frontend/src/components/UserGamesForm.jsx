@@ -42,7 +42,7 @@ function UserGamesForm() {
         required_error: "Price is required",
       })
       .min(1, { message: "Price is required" }),
-    category: z
+    category_id: z
       .string({
         required_error: "Category is required",
       })
@@ -63,13 +63,12 @@ function UserGamesForm() {
       name: "",
       image: "",
       price: "",
-      category: "",
+      category_id: "",
       description: "",
     },
   });
 
   const onSumbit = async (values) => {
-    console.log(values);
     await fetch(`${BASE_URL}/sell`, {
       method: "POST",
       headers: {
@@ -78,7 +77,7 @@ function UserGamesForm() {
       body: JSON.stringify({
         ...values,
         price: Number(values.price),
-        category: Number(values.category),
+        category_id: Number(values.category_id),
       }),
     })
       .then((res) => res.json())
@@ -143,7 +142,7 @@ function UserGamesForm() {
             )}
           />
           <Controller
-            name="category"
+            name="category_id"
             control={control}
             render={({ field, fieldState }) => (
               <div>

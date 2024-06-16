@@ -42,5 +42,14 @@ class User:
             "email": self.email
         }
     
+    @classmethod
+    def drop_table(cls):
+            sql = f"""
+                  DROP TABLE { cls.TABLE_NAME}
+            """
+            cursor.execute(sql)
+            conn.commit
+    
 # User.create_table()
+
 

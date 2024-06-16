@@ -1,5 +1,4 @@
 from db import conn, cursor
-from models.users import User
 class Game:
     TABLE_NAME = "games"
     def __init__(self, name, image, price, category_id, description):
@@ -9,9 +8,8 @@ class Game:
         self.price = price
         self.category_id = category_id
         self.description = description
-        self.user_id = User.user_id
         self.category = None
-        self.user = None
+      
         
 
     @classmethod
@@ -22,9 +20,8 @@ class Game:
                name TEXT NOT NULL,
                image VARCHAR NOT NULL,
                price INTEGER NOT NULL,
-               description VARCHAR NOT NULL,
                category_id INTEGER NOT NULL REFERENCES categories(id),
-               user_id INTEGER REFERENCES users(id)
+               description VARCHAR NOT NULL
            )
         """
         cursor.execute(sql)
@@ -33,10 +30,10 @@ class Game:
 
     def save(self):
         sql = f"""
-            INSERT INTO {self.TABLE_NAME} (name, image, price, category_id, description, user_id)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO {self.TABLE_NAME} (name, image, price, category_id, description)
+            VALUES (?, ?, ?, ?, ?)
         """
-        cursor.execute(sql, (self.name, self.image, self.price, self.category_id, self.description, self.user_id))
+        cursor.execute(sql, (self.name, self.image, self.price, self.category_id, self.description))
         conn.commit()
         self.id = cursor.lastrowid
         return self
@@ -49,7 +46,6 @@ class Game:
             "price": self.price,
             "category": self.category,
             "description": self.description,
-            "user": self.user
         }
     
     
@@ -61,5 +57,7 @@ class Game:
             """
             cursor.execute(sql)
             conn.commit
+
+# Game.drop_table()
 
 # Game.create_table()
