@@ -6,8 +6,8 @@ function GameCollection({ games }) {
     <>
       <Row className="g-4">
         {games.map((game) => (
-          <Col>
-            <GameCard {...game} key={game.id} />
+          <Col key={game.id}>
+            <GameCard {...game} />
           </Col>
         ))}
       </Row>

@@ -34,8 +34,7 @@ def get_games():
     return games
 
 
-    
-    
+
 
 
 

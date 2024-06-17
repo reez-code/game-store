@@ -9,10 +9,10 @@ function LandingPageContent() {
   return (
     <>
       <section style={styling} className="section-1">
-        <h3 className="h4-landing-page">WELCOME TO THE WORLD OF GAMING</h3>
+        <h3 className="h4-landing-page">WELCOME TO THE GAME VAULT</h3>
         <p id="section-1-content">
-          We offer you multiple games from multiple genres - <br />
-          not only that but you can sell your games on our website
+          We offer multiple games from multiple genres - <br />
+          and a place for you to sell your games.
         </p>
         <NavLink className="button-1" href="/home">
           <span id="button-text">
@@ -22,8 +22,6 @@ function LandingPageContent() {
           </span>
         </NavLink>
       </section>
-
-      <section className="section-2"></section>
     </>
   );
 }
