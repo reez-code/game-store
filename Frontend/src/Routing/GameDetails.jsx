@@ -7,7 +7,7 @@ import DetailsCollection from "../components/DetailsCollection";
 function GameDetails() {
   const params = useParams();
   const [games, setGames] = useState([]);
-
+  const [purchases, setPurchases] = useState([]);
   useEffect(() => {
     fetch(`${BASE_URL}/home`, {
       method: "GET",
@@ -27,10 +27,31 @@ function GameDetails() {
     );
   }, [params.id]);
 
+  useEffect(() => {
+    fetch(`${BASE_URL}/purchase`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) =>
+      res
+        .json()
+        .then((data) => {
+          console.log(data);
+          const purchase_id = data.filter((purchase) => {
+            return purchase.game.id == params.id;
+          });
+          // console.log(purchase_id);
+          setPurchases(purchase_id);
+        })
+        .catch((err) => console.log(err))
+    );
+  }, [params.id]);
+
   return (
     <>
       <LandingPageNav />
-      <DetailsCollection games={games} />
+      <DetailsCollection games={games} purchases={purchases.length} />
     </>
   );
 }

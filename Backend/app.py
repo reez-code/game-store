@@ -49,7 +49,10 @@ def save_purchases(data: PurchaseModel):
     purchase.save()
     return purchase.to_dict()
 
-
+@app.get("/purchase")
+def get_purchases():
+    purchase = Purchase.find_all()
+    return purchase
 
 
 

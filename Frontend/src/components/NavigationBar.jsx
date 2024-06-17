@@ -24,7 +24,7 @@ function NavigationBar({ handleSearch }) {
         width="100%"
       >
         <Container>
-          <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="/">GAME VAULT</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

@@ -1,4 +1,4 @@
-function DetailsCard({ image, description, name, price, user }) {
+function DetailsCard({ image, description, name, price, user, purchases }) {
   return (
     <>
       <div className="col-md-4 ">
@@ -10,6 +10,8 @@ function DetailsCard({ image, description, name, price, user }) {
           <p className="card-text">{description}</p>
           <p className="card-text">
             <small className="text-body-secondary">
+              Purchases Made : {purchases}
+              <br />
               Price: Kshs {price}
               <br />
               Seller: {user.name}
