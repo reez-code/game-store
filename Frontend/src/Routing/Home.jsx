@@ -5,6 +5,7 @@ import { BASE_URL } from "../../fetch_data";
 
 function Home() {
   const [games, setGames] = useState([]);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     fetch(`${BASE_URL}/home`, {
       method: "GET",
@@ -20,11 +21,16 @@ function Home() {
         .catch((err) => console.log(err))
     );
   }, []);
-
+  const handleSearch = (search) => {
+    setSearch(search);
+  };
+  const filteredGames = games.filter((game) => {
+    return game.name.toLowerCase().includes(search.toLowerCase());
+  });
   return (
     <>
-      <NavigationBar />
-      <GameCollection games={games} />
+      <NavigationBar handleSearch={handleSearch} />
+      <GameCollection games={filteredGames} />
     </>
   );
 }

@@ -3,8 +3,15 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useState } from "react";
 
-function NavigationBar() {
+function NavigationBar({ handleSearch }) {
+  const [search, setSearch] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+    handleSearch(search);
+  };
   return (
     <>
       <Navbar
@@ -14,6 +21,7 @@ function NavigationBar() {
         sticky="top"
         bg="dark"
         data-bs-theme="dark"
+        width="100%"
       >
         <Container>
           <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
@@ -23,15 +31,16 @@ function NavigationBar() {
               <Nav.Link href="/home">Home</Nav.Link>
               <Nav.Link href="/sell">Sell Your Game</Nav.Link>
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
+            <div className="d-flex">
+              <input
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                value={search}
+                onChange={handleSubmit}
               />
-              <Button variant="outline-info">Search</Button>
-            </Form>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
