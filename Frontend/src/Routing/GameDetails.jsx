@@ -41,7 +41,7 @@ function GameDetails() {
           const purchase_id = data.filter((purchase) => {
             return purchase.game.id == params.id;
           });
-          // console.log(purchase_id);
+
           setPurchases(purchase_id);
         })
         .catch((err) => console.log(err))
