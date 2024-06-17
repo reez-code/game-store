@@ -86,7 +86,6 @@ class Game:
             "category": self.category,
             "description": self.description,
             "user": self.user
-
         }
     
     

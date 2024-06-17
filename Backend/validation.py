@@ -8,3 +8,5 @@ class GamesModel(BaseModel):
     price: int
     category_id: int
     description: str
+
+
